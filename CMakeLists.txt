@@ -6,13 +6,14 @@ if (NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Release")
 endif()
 
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR})
 find_package(Boost REQUIRED thread signals)
-find_package(Eigen REQUIRED)
+find_package(Eigen3 REQUIRED)
 find_package(PCL REQUIRED COMPONENTS common kdtree io)
 
-include_directories (include ${EIGEN_INCLUDE_DIRS} ${PCL_INCLUDE_DIRS})
+include_directories (include ${EIGEN3_INCLUDE_DIRS} ${PCL_INCLUDE_DIRS})
 
-add_definitions(${EIGEN_DEFINITIONS})
+add_definitions(${EIGEN3_DEFINITIONS})
 add_definitions(${PCL_DEFINITIONS})
 
 find_package(OpenMP)
@@ -54,6 +55,6 @@ add_library (${PROJECT_NAME}
 )
 
 add_executable (test_tracking test_tracking.cpp)
-target_link_libraries(${PROJECT_NAME} ${EIGEN_LIBRARIES} ${PCL_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${EIGEN3_LIBRARIES} ${PCL_LIBRARIES})
 target_link_libraries (test_tracking ${PROJECT_NAME})
 
